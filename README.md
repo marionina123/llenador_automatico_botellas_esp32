@@ -89,26 +89,29 @@ El software está desarrollado en **Arduino IDE**, utilizando una estructura mod
 ---
 
 ## Estructura inicial del repositorio
+
+```
 llenador-automatico-botellas-esp32/
 │
-├─ src/ → código fuente del sistema (ino, cpp, h)
-│ ├─ llenador-automatico-botellas-esp32.ino
-│ ├─ sensores.cpp
-│ ├─ sensores.h
-│ ├─ actuadores.cpp
-│ ├─ actuadores.h
-│ ├─ botones.cpp
-│ └─ botones.h
+├─ src/                     → código fuente del sistema (ino, cpp, h)
+│   ├─ llenador-automatico-botellas-esp32.ino
+│   ├─ sensores.cpp
+│   ├─ sensores.h
+│   ├─ actuadores.cpp
+│   ├─ actuadores.h
+│   ├─ botones.cpp
+│   └─ botones.h
 │
-├─ docs/ → reportes y archivos del proyecto
+├─ docs/                    → reportes y archivos del proyecto
 │
-├─ hardware/ → esquemas, diagramas y fotos del montaje
+├─ hardware/                → esquemas, diagramas y fotos del montaje
 │
-├─ img/ → imágenes del prototipo
+├─ img/                     → imágenes del prototipo
 │
-├─ README.md → descripción general del proyecto
-├─ LICENSE → licencia del repositorio
-└─ .gitignore → archivos ignorados por Git
+├─ README.md                → descripción general del proyecto
+├─ LICENSE                  → licencia del repositorio
+└─ .gitignore               → archivos ignorados por Git
+```
 
 ---
 
