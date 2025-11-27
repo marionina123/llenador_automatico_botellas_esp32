@@ -94,13 +94,6 @@ El software está desarrollado en **Arduino IDE**, utilizando una estructura mod
 llenador-automatico-botellas-esp32/
 │
 ├─ src/                     → código fuente del sistema (ino, cpp, h)
-│   ├─ llenador-automatico-botellas-esp32.ino
-│   ├─ sensores.cpp
-│   ├─ sensores.h
-│   ├─ actuadores.cpp
-│   ├─ actuadores.h
-│   ├─ botones.cpp
-│   └─ botones.h
 │
 ├─ docs/                    → reportes y archivos del proyecto
 │
