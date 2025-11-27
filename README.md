@@ -89,14 +89,6 @@ El software está desarrollado en **Arduino IDE**, utilizando una estructura mod
 ---
 
 ## Estructura inicial del repositorio
-llenador_automatico_botellas_esp32
-/docs/ → documentación del proyecto
-/hardware/ → esquemas, diagramas, fotos del montaje
-/src/ → código fuente (FreeRTOS, lógica del sistema)
-README.md → descripción del proyecto
-LICENSE → licencia del repositorio
-.gitignore → archivos ignorados por Git
-
 llenador-automatico-botellas-esp32/
 │
 ├─ src/ → código fuente del sistema (ino, cpp, h)
