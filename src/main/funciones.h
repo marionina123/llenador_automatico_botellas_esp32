@@ -11,6 +11,13 @@
 // CONFIGURACION GENERAL
 // pendiente:
 // define pines, constanes, tiempos
+// Pines de los botones
+#define BTN_MARCHA    14
+#define BTN_PARADA    27
+#define BTN_LLENAR    26
+
+// Tiempo de debounce 
+#define DEBOUNCE_TIME_MS  30
 
 // TIPOS Y ESTADO DEL SISTEMA
 
@@ -50,7 +57,7 @@ void TaskControl(void *pvParameters);
 void TaskIO(void *pvParameters);
 
 // BOTONES
-// pendiente: funciones relacionadas con los botones
+void procesarLecturaBotones();
 
 // ACTUADORES
 // pendiente: funciones para controlar bomba, LEDS, etc

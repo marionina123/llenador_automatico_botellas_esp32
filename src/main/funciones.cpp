@@ -4,7 +4,106 @@
 
 
 // Configuracion / pines / constantes
+void configurarBotones()
+{
+  pinMode(BTN_MARCHA, INPUT_PULLUP);
+  pinMode(BTN_PARADA, INPUT_PULLUP);
+  pinMode(BTN_LLENAR, INPUT_PULLUP);
+}
 
+// Variables internas antirrebote
+static bool lastMarcha = false, stableMarcha = false;
+static bool lastParada = false, stableParada = false;
+static bool lastLlenar = false, stableLlenar = false;
+
+static uint32_t lastTimeMarcha = 0;
+static uint32_t lastTimeParada = 0;
+static uint32_t lastTimeLlenar = 0;
+
+void procesarLecturaBotones()
+{
+  // Lectura cruda (invertida porque INPUT_PULLUP: LOW = presionado)
+  bool rawMarcha = (digitalRead(BTN_MARCHA) == LOW);
+  bool rawParada = (digitalRead(BTN_PARADA) == LOW);
+  bool rawLlenar = (digitalRead(BTN_LLENAR) == LOW);
+
+  uint32_t ahora = millis();
+
+  // Debounce MARCHA
+  if(rawMarcha != lastMarcha)
+  {
+    lastTimeMarcha = ahora;
+    lastMarcha = rawMarcha;
+  }
+
+  if((ahora - lastTimeMarcha) > DEBOUNCE_TIME_MS)
+  {
+    if(stableMarcha != rawMarcha)
+    {
+      stableMarcha = rawMarcha;
+
+      if(stableMarcha)
+      {
+        Serial.println("[BOTON] MARCHA presionado");
+
+        EstadoCompartido est;
+        leerEstado(est);
+        est.botonMarcha = true;
+        escribirEstado(est);
+      }
+    }
+  }
+
+  // Debounce PARADA
+  if(rawParada != lastParada)
+  {
+    lastTimeParada = ahora;
+    lastParada = rawParada;
+  }
+
+  if((ahora - lastTimeParada) > DEBOUNCE_TIME_MS)
+  {
+    if(stableParada != rawParada)
+    {
+      stableParada = rawParada;
+
+      if(stableParada)
+      {
+        Serial.println("[BOTON] PARADA presionado");
+
+        EstadoCompartido est;
+        leerEstado(est);
+        est.botonParada = true;
+        escribirEstado(est);
+      }
+    }
+  }
+
+  // Debounce Llenar
+  if(rawLlenar != lastLlenar)
+  {
+    lastTimeLlenar = ahora;
+    lastLlenar = rawLlenar;
+  }
+
+  if((ahora - lastTimeLlenar) > DEBOUNCE_TIME_MS)
+  {
+    if(stableLlenar != rawLlenar)
+    {
+      stableLlenar = rawLlenar;
+
+      if(stableLlenar)
+      {
+        Serial.println("[BOTON] LLENAR presionado");
+
+        EstadoCompartido est;
+        leerEstado(est);
+        est.botonLlenar = true;
+        escribirEstado(est);
+      }
+    }
+  } 
+}
 // ESTADO GLOBAL DEL SISTEMA
 static EstadoCompartido g_estado; // variable global interna a este archivo
 
@@ -28,6 +127,8 @@ void inicializarEstadoSistema()
   g_estado.errorSinFlujo        = false;
   g_estado.errorMuchoTiempo     = false;
 }
+
+
 
 // Lee una copia del estado protegido por el mutex
 void leerEstado(EstadoCompartido &dest)
@@ -104,6 +205,13 @@ void TaskDebug(void *pvParameters)
         break;
     }
 
+    Serial.print("Marcha=");
+    Serial.print(local.botonMarcha);
+    Serial.print("Parada=");
+    Serial.print(local.botonParada);
+    Serial.print("llenar=");
+    Serial.println(local.botonLlenar);
+
     vTaskDelay(pdMS_TO_TICKS(1000)); //tiempo sin bloquear a las demas tareas
   }
 }
@@ -156,10 +264,12 @@ void TaskIO(void *pvParameters)
 {
   (void) pvParameters;
 
+  configurarBotones();
+
   for(;;)
   {
-    Serial.println("[TaskIO] (sin uso aun)");
-    vTaskDelay(pdMS_TO_TICKS(1500));
+    procesarLecturaBotones();
+    vTaskDelay(pdMS_TO_TICKS(20));
   }
 }
 // BOTONES
