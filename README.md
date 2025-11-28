@@ -92,7 +92,7 @@ El desarrollo se ha realizado por fases. El *firmware* se encuentra **funcional 
 
 ---
 
-## 🎛️ Hardware utilizado
+## Hardware utilizado
 
 - **ESP32**
 - **Minibomba de agua**
