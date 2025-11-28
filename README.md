@@ -5,24 +5,6 @@ Este repositorio contiene el desarrollo de un **sistema embebido** capaz de llen
 
 ---
 
-## Características principales
-
-- **Volumen fijo de 500 ml** medido mediante un sensor de flujo.
-- **Detección de botella** utilizando un sensor ultrasónico.
-- **Control seguro de una minibomba** a través de una etapa de potencia.
-- **Tres botones físicos de operación**:
-  - **START:** habilita el sistema.
-  - **STOP:** detiene todo inmediatamente.
-  - **LLENAR:** inicia el llenado manual (solo si hay botella).
-- **Pantalla de usuario** para mostrar estado y mensajes.
-- **Arquitectura basada en FreeRTOS**, con múltiples tareas concurrentes.
-- **Interrupciones (ISR)** para conteo preciso de pulsos del sensor de flujo.
-- **Temporización no bloqueante**, basada en ticks del sistema.
-- **Máquina de estados finita (FSM)** para gestionar todo el flujo del sistema.
-- **Comunicación serie** para diagnóstico (solo desarrollador).
-
----
-
 ## Descripción general del funcionamiento
 
 1. Al encenderse, el sistema entra en **Estado Detenido**.  
@@ -44,6 +26,82 @@ Este repositorio contiene el desarrollo de un **sistema embebido** capaz de llen
    - Tiempo máximo excedido  
    El sistema pasa a **Estado de Error**.
 8. El botón **STOP** detiene el sistema en cualquier momento.
+
+---
+
+## Características principales
+
+- **Volumen fijo de 500 ml** medido mediante un sensor de flujo.
+- **Detección de botella** utilizando un sensor ultrasónico.
+- **Control seguro de una minibomba** a través de una etapa de potencia.
+- **Tres botones físicos de operación**:
+  - **START:** habilita el sistema.
+  - **STOP:** detiene todo inmediatamente.
+  - **LLENAR:** inicia el llenado manual (solo si hay botella).
+- **Pantalla de usuario** para mostrar estado y mensajes.
+- **Arquitectura basada en FreeRTOS**, con múltiples tareas concurrentes.
+- **Interrupciones (ISR)** para conteo preciso de pulsos del sensor de flujo.
+- **Temporización no bloqueante**, basada en ticks del sistema.
+- **Máquina de estados finita (FSM)** para gestionar todo el flujo del sistema.
+- **Comunicación serie** para diagnóstico (solo desarrollador).
+
+---
+
+## Tecnologías Utilizadas
+
+El proyecto utiliza las siguientes tecnologías y herramientas clave, enfocadas en la **programación concurrente** y el **control determinista**:
+
+| Componente | Tecnología/Herramienta | Propósito |
+| :--- | :--- | :--- |
+| **Microcontrolador** | **ESP32** (con soporte dual-core) | Ejecución del *firmware* y FreeRTOS. |
+| **Sistema Operativo** | **FreeRTOS** | Arquitectura concurrente, manejo de tareas en paralelo y protección de datos mediante **Mutex**. |
+| **Desarrollo** | **Arduino IDE** (Lenguaje **C/C++**) | Plataforma de desarrollo principal. |
+| **Metodología** | **Máquina de Estados Finita (FSM)** | Control determinista y seguro de la lógica del sistema. |
+| **Precisión** | **Interrupciones (ISR)** | Conteo de pulsos del sensor de flujo para medición precisa de volumen. |
+
+---
+
+## Integrantes y Roles
+
+Este proyecto fue desarrollado en solitario por **Mario Alberto Nina Gallo**.
+
+| Rol | Responsabilidad |
+| :--- | :--- |
+| **Ingeniero de Firmware** | Programación completa de las tareas de FreeRTOS, FSM, lógica de control y manejo de sensores/actuadores. |
+| **Arquitecto del Sistema** | Diseño de la **Arquitectura Modular** y la implementación del **Estado Compartido** protegido por `Mutex`. |
+| **Diseñador de Hardware** | Selección de componentes y diseño del esquema de conexión. |
+
+---
+## ✨ Estado Actual del Proyecto (Avances Funcionales)
+
+El desarrollo se ha realizado por fases. El *firmware* se encuentra **funcional hasta la Fase 6**, con la integración del *hardware* esencial y la columna vertebral del sistema establecida.
+
+| Fase Completada | Avance Concreto | Concepto Implementado |
+| :--- | :--- | :--- |
+| **Fase 1-3** | **Arquitectura y Concurrencia** | Estructura modular, **FreeRTOS** y **Mutex** funcional para el manejo seguro del Estado Compartido. |
+| **Fase 4** | **Entradas Físicas (Botones)** | Lógica de **debounce** implementada para la lectura estable de los botones (START, STOP, LLENAR). |
+| **Fase 5** | **Actuador (Bomba)** | Control de la **Minibomba** mediante la etapa de potencia, activada y desactivada por comandos de botones. |
+| **Fase 6** | **Detección de Botella** | Integración del **Sensor Ultrasónico** con filtrado y estabilidad para detectar la presencia de una botella. |
+
+### ⏭️ Próximos Pasos (Pendiente de Implementación)
+
+* **Fase 7:** Integración del sensor de flujo e Interrupciones (ISR).
+* **Fase 8 & 9:** Implementación e integración completa de la Máquina de Estados Finita (FSM).
+* **Fase 10:** Integración de la Pantalla (UI).
+
+---
+
+## 🎛️ Hardware utilizado
+
+- **ESP32**
+- **Minibomba de agua**
+- **Sensor de flujo**
+- **Sensor ultrasónico**
+- **Botones:** START, STOP, LLENAR
+- **Pantalla** (LCD)
+- **Etapa de potencia para la bomba**
+- **Fuente de alimentación**
+- **Mangueras y estructura básica**
 
 ---
 
