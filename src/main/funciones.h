@@ -6,6 +6,7 @@
 #include <Arduino.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "freertos/semphr.h" // para el mutex
 
 // CONFIGURACION GENERAL
 // pendiente:
@@ -36,11 +37,12 @@ struct EstadoCompartido
   bool errorMuchoTiempo;
 };
 
-// inicializacion del estado global
+// inicializacion del estado global (crear estado y mutex)
 void inicializarEstadoSistema();
-// pendiente: funiones para leer/esecribir estado de forma segura
-// void leerEstado(EstadoCompartido &dest);
-// void escribirEstado(const EstadoCompartido &src);
+
+// Acceso seguro al estado compartido
+void leerEstado(EstadoCompartido &dest);
+void escribirEstado(const EstadoCompartido &src);
 
 // PROTOTIPOS DE TAREAS FREERTOS
 void TaskDebug(void *pvParameters);
