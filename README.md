@@ -249,4 +249,26 @@ Esto permite recuperar información histórica relevante después de un reinicio
 ---
 
 ## Estructura del repositorio
+```
+│
+├─ src/                     → código fuente modular (ino, cpp, h)
+├─ docs/                    → documentación y reportes
+├─ hardware/                → esquemas, diagramas y fotos del montaje
+├─ img/                     → imágenes del prototipo
+│
+├─ README.md                → descripción general del proyecto
+├─ LICENSE                  → licencia del repositorio
+└─ .gitignore               → archivos ignorados por Git
+```
+---
+
+## Objetivo del proyecto
+
+Construir un sistema embebido **seguro, robusto y funcional**, capaz de controlar el llenado de botellas a partir de datos capturados en tiempo real, empleando sensores reales, temporización determinista, una máquina de estados clara y almacenamiento persistente.
+
+---
+
+## Autor
+
+Proyecto desarrollado por **Mario Alberto Nina Gallo**, como parte del curso **Sistemas Embebidos I (IMT-222)**.
 
